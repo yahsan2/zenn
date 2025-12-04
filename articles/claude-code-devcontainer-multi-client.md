@@ -60,7 +60,7 @@ https://docs.anthropic.com/en/docs/claude-code/devcontainer
   → クライアント A のアカウントでログイン
   → セキュリティポリシー適用
 
-クライアント B（例: 別の会社）
+クライアント B（例: client-b）
   → 専用の devcontainer
   → 専用のボリューム（claude-client-b）
   → クライアント B のアカウントでログイン
@@ -97,31 +97,11 @@ https://docs.anthropic.com/en/docs/claude-code/devcontainer
 
 ### 2. 多層的なセキュリティ
 
-Dev Container による**物理的な隔離**と、Claude Code の**設定による制御**を組み合わせることで、より堅牢なセキュリティを実現できます。
+Dev Container による**物理的な隔離**で、より堅牢なセキュリティを実現できます。
 
-**Dev Container による物理的な隔離**:
 - コンテナ外のファイルに物理的にアクセスできない
 - ホストマシンの `~/.ssh` や `~/.aws` などの機密情報から保護
 - 万が一の事故でも影響範囲がコンテナ内に限定される
-
-**Claude Code の設定（.claude/settings.json）による追加制御**:
-
-Dev Container の有無に関わらず使える機能ですが、併用することでより細かい制御が可能です。
-
-```json
-{
-  "permissions": {
-    "deny": [
-      "Read(./.env*)",
-      "Read(./secrets/**)",
-      "Bash(curl:*)",
-      "Bash(git:*)",
-      "Bash(yarn:add*)",
-      "Bash(rm:*)"
-    ]
-  }
-}
-```
 
 ### 3. 監査証跡の明確化
 
