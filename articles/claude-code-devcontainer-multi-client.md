@@ -1,5 +1,5 @@
 ---
-title: "個人用とクライアント用の Claude Code を併用する方法 - devcontainer + ボリューム分離で安全に"
+title: "個人用とクライアント用の Claude Code を併用する方法 - Dev Container + ボリューム分離で安全に"
 emoji: "🔐"
 type: "tech"
 topics: ["claudecode", "devcontainer", "docker", "security", "freelance"]
@@ -44,9 +44,15 @@ Claude Code に `.env` ファイルを見られたくないが、毎回確認す
 - 一度許可すると記録に残る
 - クライアントへの説明責任が果たせない
 
-## この記事の解決策: devcontainer + ボリューム分離
+## この記事の解決策: Dev Container + ボリューム分離
 
 これらの問題を**技術的に完全に解決**する方法を紹介します。
+
+:::message
+Claude Code 公式ドキュメントでも Dev Container の使用が推奨されています。
+https://docs.anthropic.com/en/docs/claude-code/devcontainer
+:::
+
 
 ### 解決策の全体像
 
@@ -73,7 +79,7 @@ Claude Code に `.env` ファイルを見られたくないが、毎回確認す
 
 ### 1. 完全な隔離 = 混ざらない保証
 
-**devcontainer とは**:
+**Dev Container とは**:
 - Docker コンテナ内で開発環境を動かす仕組み
 - 各プロジェクトが**別々の仮想マシン**のように動作
 - クライアント A のコンテナからクライアント B のファイルに物理的にアクセスできない
@@ -85,7 +91,7 @@ Claude Code に `.env` ファイルを見られたくないが、毎回確認す
 
 ### 2. セキュリティポリシーの強制
 
-devcontainer を使うと、Claude Code が**何にアクセスできるか**を厳密に制御できます。
+Dev Container を使うと、Claude Code が**何にアクセスできるか**を厳密に制御できます。
 
 **.claude/settings.json で制御できること**:
 
@@ -118,7 +124,7 @@ devcontainer を使うと、Claude Code が**何にアクセスできるか**を
 
 ## 使い方: 2つの方法
 
-devcontainer を使う方法は2つあります。
+Dev Container を使う方法は2つあります。
 
 ### 方法 1: VS Code 拡張機能
 
@@ -131,9 +137,9 @@ VS Code には **Dev Containers 拡張機能**（旧 Remote - Containers）が�
 
 VS Code ユーザーには最も馴染みやすい方法です。
 
-### 方法 2: devcontainer CLI
+### 方法 2: Dev Container CLI
 
-ターミナルから直接操作したい場合は **devcontainer CLI** を使います。
+ターミナルから直接操作したい場合は **Dev Container CLI** を使います。
 
 ```bash
 # インストール
@@ -156,7 +162,7 @@ claude
 ### ステップ 1: 前提条件
 
 - Docker Desktop がインストールされていること
-- VS Code + Dev Containers 拡張機能、または devcontainer CLI
+- VS Code + Dev Containers 拡張機能、または Dev Container CLI
 
 ### ステップ 2: devcontainer.json を作成
 
@@ -267,4 +273,4 @@ docker volume rm claude-client-a
 - **請求の透明性**: アカウントごとに API 使用量が分離
 - **監査証跡**: どのプロジェクトでどのアカウントを使ったか明確
 
-VS Code の Dev Containers 拡張機能か devcontainer CLI を使って、安全にクライアントワークを進めましょう。
+VS Code の Dev Containers 拡張機能か Dev Container CLI を使って、安全にクライアントワークを進めましょう。
