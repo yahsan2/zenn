@@ -15,6 +15,8 @@ published: false
 
 ## よくある困りごと
 
+![](/images/claude-code-devcontainer-multi-client/robot-problem-risk.jpeg)
+
 ### シナリオ 1: 「誤って個人アカウントでクライアントコードにアクセスしてしまった...」
 
 あなたは個人の趣味プロジェクトで Claude Code を使っていました。ある日、クライアントワークで Claude Code を起動したら、同じアカウントでログインされていました。
@@ -58,7 +60,8 @@ https://docs.anthropic.com/en/docs/claude-code/devcontainer
 
 ```
 個人プロジェクト
-  → ローカルでは Claude Code を使わない（リスク回避）
+  → devcontainer でローカルの ~/.claude をマウント
+  → 自分のアカウントをそのまま使用
 
 クライアント A（例: client-a）
   → 専用の devcontainer
@@ -74,6 +77,18 @@ https://docs.anthropic.com/en/docs/claude-code/devcontainer
 ```
 
 **重要なポイント**: 各クライアントは**物理的に隔離された環境**で動作します。
+
+
+### マウント方式の違い
+
+| 用途 | マウント方式 | 設定例 | 特徴 |
+|------|-------------|--------|------|
+| 個人プロジェクト | bind マウント | `source=${localEnv:HOME}/.claude` | ローカルの `~/.claude` を直接共有 |
+| クライアント | Docker ボリューム | `source=claude-client-a` | 隔離された専用領域（ローカルにアクセス不可） |
+
+![Bind Mount vs Volume Mount の違い](/images/claude-code-devcontainer-multi-client/bind-vs-volume-mount.jpeg)
+
+クライアント用の devcontainer は Docker ボリュームを使うため、**ローカルの `~/.claude` には物理的にアクセスできません**。これにより、クライアント環境から個人の認証情報や履歴が漏れることを防ぎます。
 
 ## なぜこの方法が優れているのか
 
@@ -103,9 +118,6 @@ Dev Container を使うと、Claude Code が**何にアクセスできるか**�
       "Read(./secrets/**)",
       "Read(~/.ssh/**)",
       "Bash(curl:*)",
-      "Bash(git push:--force)"
-    ],
-    "ask": [
       "Bash(git:*)",
       "Bash(yarn:add*)",
       "Bash(rm:*)"
@@ -168,6 +180,34 @@ claude
 
 プロジェクトに `.devcontainer/devcontainer.json` を作成します。
 
+#### 個人プロジェクト用（ローカルの ~/.claude を使う）
+
+```json
+{
+  "name": "My Personal Project",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+  ],
+
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+
+  "remoteUser": "node"
+}
+```
+
+**ポイント**: `type=bind` でローカルの `~/.claude` を直接マウント。設定や履歴がローカルと共有されます。
+
+:::message alert
+**macOS ユーザーへの注意**: macOS では Claude Code の認証情報（OAuth トークン）は `~/.claude` ではなく **Keychain** に保存されます。そのため、bind マウントしても**初回は認証が必要**です。
+
+ただし、一度コンテナ内でログインすれば認証情報がコンテナ内の `~/.claude` に保存されるため、次回以降は再認証なしで使用できます。
+:::
+
+#### クライアント用（隔離されたボリュームを使う）
+
 ```json
 {
   "name": "Client A Project",
@@ -184,7 +224,7 @@ claude
 }
 ```
 
-**ポイント**: `source=claude-client-a` のボリューム名をクライアントごとに変更します。
+**ポイント**: `type=volume` で Docker 管理の隔離されたボリュームを使用。ローカルの `~/.claude` にはアクセスできません。ボリューム名（`claude-client-a`）をクライアントごとに変更します。
 
 ### ステップ 3: 起動
 
@@ -207,7 +247,7 @@ claude
 ```json
 {
   "mounts": [
-    "source=claude-client-acme,target=/home/node/.claude,type=volume"
+    "source=claude-client-b,target=/home/node/.claude,type=volume"
   ]
 }
 ```
@@ -242,6 +282,8 @@ claude
 
 ## 日常的な使い方
 
+![複数クライアントでの並行作業](/images/claude-code-devcontainer-multi-client/multi-client-terminal.jpeg)
+
 ```bash
 # クライアント A で作業
 cd ~/projects/client-a
@@ -265,6 +307,41 @@ docker volume ls | grep claude-client
 # 認証情報をリセットしたい場合
 docker volume rm claude-client-a
 ```
+
+## 既知の注意点
+
+Dev Container 環境で Claude Code を使う際に、いくつかの制限があります。
+
+### VS Code 拡張機能でグローバルコマンドが認識されない
+
+ローカルの `~/.claude/commands/` に定義したカスタムスラッシュコマンドは、**CLI では使えますが、VS Code 拡張機能では認識されません**。
+
+```bash
+# CLI（ターミナル）では動作する
+claude
+> /git:commit  # ✅ 使える
+
+# VS Code 拡張機能では動作しない
+> /git:commit  # ❌ 認識されない
+```
+
+これは Claude Code の既知の問題として報告されています。
+
+- [Issue #8569 - Missing slash commands in VS Code extension](https://github.com/anthropics/claude-code/issues/8569)
+- [Issue #8831 - Custom slash commands not discovered](https://github.com/anthropics/claude-code/issues/8831)
+
+**回避策**:
+
+1. **VS Code の設定で `claudeCode.useTerminal` を `true` にする** - ターミナルベースで動作するため、この問題が発生しません
+2. Dev Container 内で CLI (`claude` コマンド) を直接使用する
+3. プロジェクトローカルの `.claude/commands/` にコマンドを配置する
+
+### Skills と Commands の混同
+
+VS Code 拡張機能では、`.claude/skills/` に配置した Skills が `/` のオートコンプリートにスラッシュコマンドとして表示されることがあります。これは Skills と Commands の境界が曖昧な設計上の問題です。
+
+- [Issue #10246 - Add Skill Autocomplete to CLI](https://github.com/anthropics/claude-code/issues/10246)
+- [Issue #10768 - Skills Natural Language Matching Broken](https://github.com/anthropics/claude-code/issues/10768)
 
 ## まとめ
 
