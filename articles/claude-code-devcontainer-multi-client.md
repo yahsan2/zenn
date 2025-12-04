@@ -211,7 +211,7 @@ claude
 ```json
 {
   "name": "Client A Project",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22", // 適宜変更
 
   "mounts": [
     "source=claude-client-a,target=/home/node/.claude,type=volume",
@@ -319,10 +319,10 @@ Dev Container 環境で Claude Code を使う際に、いくつかの制限が�
 ```bash
 # CLI（ターミナル）では動作する
 claude
-> /git:commit  # ✅ 使える
+> /your:custom-command  # ✅ 使える
 
 # VS Code 拡張機能では動作しない
-> /git:commit  # ❌ 認識されない
+> /your:custom-command  # ❌ 認識されない
 ```
 
 これは Claude Code の既知の問題として報告されています。
