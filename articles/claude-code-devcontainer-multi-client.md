@@ -104,11 +104,18 @@ https://docs.anthropic.com/en/docs/claude-code/devcontainer
 - `claude-client-a` と `claude-client-b` は**完全に別の場所**
 - 一方のセッションが他方に影響することは**技術的に不可能**
 
-### 2. セキュリティポリシーの強制
+### 2. 多層的なセキュリティ
 
-Dev Container を使うと、Claude Code が**何にアクセスできるか**を厳密に制御できます。
+Dev Container による**物理的な隔離**と、Claude Code の**設定による制御**を組み合わせることで、より堅牢なセキュリティを実現できます。
 
-**.claude/settings.json で制御できること**:
+**Dev Container による物理的な隔離**:
+- コンテナ外のファイルに物理的にアクセスできない
+- ホストマシンの `~/.ssh` や `~/.aws` などの機密情報から保護
+- 万が一の事故でも影響範囲がコンテナ内に限定される
+
+**Claude Code の設定（.claude/settings.json）による追加制御**:
+
+Dev Container の有無に関わらず使える機能ですが、併用することでより細かい制御が可能です。
 
 ```json
 {
@@ -116,7 +123,6 @@ Dev Container を使うと、Claude Code が**何にアクセスできるか**�
     "deny": [
       "Read(./.env*)",
       "Read(./secrets/**)",
-      "Read(~/.ssh/**)",
       "Bash(curl:*)",
       "Bash(git:*)",
       "Bash(yarn:add*)",
@@ -254,7 +260,7 @@ claude
 
 ## セキュリティ設定
 
-`.claude/settings.json` で Claude Code のアクセス権限を制御できます。
+`.claude/settings.json` で Claude Code のアクセス権限を制御できます（Dev Container の有無に関わらず使える機能です）。
 
 ```json
 {
