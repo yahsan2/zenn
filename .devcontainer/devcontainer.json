@@ -1,0 +1,13 @@
+{
+  "name": "Zenn Content",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+  ],
+
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+
+  "remoteUser": "node"
+}
