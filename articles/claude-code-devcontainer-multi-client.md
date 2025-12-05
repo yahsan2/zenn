@@ -229,6 +229,54 @@ claude
 }
 ```
 
+### Docker Compose を使う場合
+
+`node_modules` のパフォーマンス最適化などで Docker Compose を使いたい場合、構文が少し異なります。
+
+#### 個人プロジェクト用（compose.yaml）
+
+```yaml
+volumes:
+  node_modules:
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/typescript-node:20
+    volumes:
+      - ..:/workspaces/my-project:cached
+      - node_modules:/workspaces/my-project/node_modules
+      - ${HOME}/.claude:/home/node/.claude           # bind mount
+      - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
+    tty: true
+    stdin_open: true
+```
+
+#### クライアント用（compose.yaml）
+
+```yaml
+volumes:
+  node_modules:
+  claude-client-a:
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/typescript-node:20
+    volumes:
+      - ..:/workspaces/client-project:cached
+      - node_modules:/workspaces/client-project/node_modules
+      - claude-client-a:/home/node/.claude           # Docker volume
+      - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
+    tty: true
+    stdin_open: true
+```
+
+#### 構文の違い
+
+| 設定ファイル | 環境変数 |
+|-------------|----------|
+| devcontainer.json | `${localEnv:HOME}` |
+| compose.yaml | `${HOME}` |
+
 ## セキュリティ設定
 
 `.claude/settings.json` で Claude Code のアクセス権限を制御できます（Dev Container の有無に関わらず使える機能です）。
