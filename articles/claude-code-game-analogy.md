@@ -517,6 +517,7 @@ PRを作成する一連の流れをコマンド化できます：
 ---
 description: 変更をプッシュしてPRを作成する
 argument-hint: <title>
+allowed-tools: Bash(git:*), Bash(gh:*)
 ---
 
 PRを作成してください。タイトルは「$ARGUMENTS」です。
