@@ -500,7 +500,7 @@ skills: eslint-check, type-check, security-scan
 ```md:.claude/commands/hunt.md
 ---
 description: モンスターを探して倒す
-argument-hint: <monster>
+argument-hint: [monster]
 ---
 
 $ARGUMENTS を探して倒してください。
@@ -516,7 +516,7 @@ PRを作成する一連の流れをコマンド化できます：
 ```md:.claude/commands/pr.md
 ---
 description: 変更をプッシュしてPRを作成する
-argument-hint: <title>
+argument-hint: [title]
 allowed-tools: Bash(git:*), Bash(gh:*)
 ---
 
