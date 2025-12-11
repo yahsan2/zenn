@@ -313,6 +313,7 @@ Claude Code では、`.claude/skills/` にスキルを定義します。
 
 ドラゴン: 「ぐわあああ！」
 ```
+![](/images/claude-code-game-analogy/image_10.jpeg)
 
 **適切な魔法を自分で判断して攻撃してくれるようになりました！**
 
@@ -467,6 +468,7 @@ skills: eslint-check, type-check, security-scan
 
 ドラゴン: 「ぐわあああ！」
 ```
+![](/images/claude-code-game-analogy/image_9.jpeg)
 
 **役割を分けたことで、それぞれが得意なことに専念できるようになりました！**
 
@@ -707,12 +709,10 @@ Claude Code では、プロジェクトルートに `CLAUDE.md` を置きます�
 
 ## まとめ
 
-![](/images/claude-code-game-analogy/image_8.jpeg)
-
 | 概念 | ゲームでの例え | 役割 |
 |------|---------------|------|
 | **CLAUDE.md** | 世界観 | 常に適用される前提条件 |
-| **Command** | /attack, /hunt | よく使う指示をまとめる。引数を受け取れる |
+| **Command** | コマンド /attack, /hunt | よく使う指示をまとめる。引数を受け取れる |
 | **Skill** | サンダー魔法、道案内 | 複雑な手順や専門知識を定義する |
 | **Subagent** | 魔法使い、道案内人 | 特定の役割を持つ仲間。並列実行できる |
 | **Rules** | 道の看板 | エリア（パス）ごとの自動適用ルール |
