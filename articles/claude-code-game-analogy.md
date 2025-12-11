@@ -2,7 +2,7 @@
 title: "ドラゴンを倒して覚える Claude Code - Command, Skill, Subagent, Rules"
 emoji: "🎮"
 type: "tech"
-topics: ["claudecode", "ai", "sdk", "プログラミング"]
+topics: ["claudecode", "llm", "ai"]
 published: true
 ---
 
@@ -18,13 +18,21 @@ Claude Code をカスタマイズしようとして、こんな経験はあり�
 
 公式ドキュメントを読んでも、**概念の使い分け**がピンとこない。そんな人のために、RPGゲームで例えてみました。
 
+:::message
+この記事で扱う概念の公式ドキュメントはこちら:
+- [Custom slash commands（Command）](https://code.claude.com/docs/en/slash-commands)
+- [Agent Skills（Skill）](https://code.claude.com/docs/en/skills)
+- [Subagents](https://code.claude.com/docs/en/sub-agents)
+- [Modular rules（Rules）](https://code.claude.com/docs/en/memory#modular-rules-with-claude/rules/)
+:::
+
 ## 冒険の始まり - あなたはプレイヤー
 
 ![](/images/claude-code-game-analogy/image_2.jpeg)
 
 あなたはモンスターを倒すRPGをプレイしています。
 
-画面の中には主人公のキャラクターがいます。あなたはプレイヤーとして、この主人公に口頭で指示を出してゲームを進めます。
+画面の中には主人公のキャラクターがいます。あなたはプレイヤーとして、この主人公に指示を出してゲームを進めます。
 
 **Claude Code で言うと：**
 - **あなた（プレイヤー）** = ユーザー
