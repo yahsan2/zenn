@@ -3,7 +3,7 @@ title: "ドラゴンを倒して覚える Claude Code - Command, Skill, Subagent
 emoji: "🎮"
 type: "tech"
 topics: ["claudecode", "ai", "sdk", "プログラミング"]
-published: false
+published: true
 ---
 
 ## この記事を読むべき人
