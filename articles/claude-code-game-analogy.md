@@ -42,8 +42,6 @@ Claude Code をカスタマイズしようとして、こんな経験はあり�
 
 ## 最初のモンスター - 毎回の確認が面倒
 
-![](/images/claude-code-game-analogy/image_3.jpeg)
-
 フィールドにスライムが現れました。
 
 ```
