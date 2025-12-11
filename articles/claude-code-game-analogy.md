@@ -14,7 +14,7 @@ Claude Code をカスタマイズしようとして、こんな経験はあり�
 - Command を作ったのに、結局 Skill との違いがわからない
 - Subagent の存在は知っているけど、いつ使うか判断できない
 
-そして最近、**Rules** という概念まで登場。「また増えた...これどこに書くの？」
+そして最近、**Rules** という概念まで登場しましたね。「また増えた...これどこに書くの？」
 
 公式ドキュメントを読んでも、**概念の使い分け**がピンとこない。そんな人のために、RPGの冒険で例えてみました。
 
@@ -93,10 +93,6 @@ Claude Code をカスタマイズしようとして、こんな経験はあり�
 1. 剣を装備する
 2. 敵に近づく
 3. 攻撃する
-
-## 注意
-- 武器の選択は聞かないで、剣を使う
-- 距離の説明は省略する
 ```
 
 :::details 現実世界での例
@@ -124,8 +120,6 @@ Claude Code では、`.claude/commands/` にコマンドを定義します。
 
 ## ドラゴンの登場 - 剣が効かない敵
 
-![](/images/claude-code-game-analogy/image_4.jpeg)
-
 スライムは簡単に倒せるようになりました。
 
 さて、次はドラゴンを倒しに行きます。
@@ -148,8 +142,10 @@ Claude Code では、`.claude/commands/` にコマンドを定義します。
 
 ドラゴン: 「効かぬわ！」
 ```
+![](/images/claude-code-game-analogy/image_4.jpeg)
 
-剣では倒せません。ドラゴンには**サンダー魔法が弱点**だったのです。
+剣では倒せません。主人公は調査をし見つけました。
+ドラゴンには**サンダー魔法が弱点**だったのです。
 
 ## Skillの登場 - 特殊な能力を定義する
 
@@ -198,9 +194,8 @@ description: 雷属性の強力な魔法攻撃。ドラゴンに有効。
 ドラゴン: 「ぐわあああ！」
 ```
 
-**ついにドラゴンを倒せました！**
-
 ![](/images/claude-code-game-analogy/image_5.jpeg)
+**ついにドラゴンを倒せました！**
 
 長い呪文を覚えなくても、「サンダー魔法を使って」の一言で倒せます。
 
@@ -313,7 +308,7 @@ Claude Code では、`.claude/skills/` にスキルを定義します。
 
 **適切な魔法を自分で判断して攻撃してくれるようになりました！**
 
-Claude Code　では、`.claude/agents/` にサブエージェントを定義します：
+Claude Code では、`.claude/agents/` にサブエージェントを定義します：
 
 ```md:.claude/agents/mage.md
 ---
@@ -548,7 +543,7 @@ PRを作成する一連の流れをコマンド化できます：
 魔法使い: （溺れる）
 ```
 
-![](/images/claude-code-game-analogy/image_7.jpeg)
+![](/images/claude-code-game-analogy/image_8.jpeg)
 
 **魔法使いは泳げませんでした。**
 
@@ -578,7 +573,7 @@ paths: world/underwater/**
 - 素早く動けないので回避より防御重視
 ```
 
-これがClaude Code　でいう**Rules（ルール）** です。
+これがClaude Codeでいう**Rules（ルール）** です。
 
 看板を立てておけば、仲間たちはエリアに入るときに自動で看板を読んでくれます。
 
@@ -591,6 +586,7 @@ paths: world/underwater/**
 
 リヴァイアサン: 「ぐわあああ！」
 ```
+![](/images/claude-code-game-analogy/image_7.jpeg)
 
 **エリアごとの注意事項を、自動で守ってくれるようになりました！**
 
@@ -640,7 +636,8 @@ Claude Code では、`.claude/rules/` にルールを定義します。
 ### 新しいモンスターに対応したい
 → 道案内人に新しい居場所スキルを追加
 
-## おまけ - CLAUDE.mdには何を書く？
+
+## CLAUDE.mdには何を書く？
 
 ここまでCommand、Skill、Subagent、Rulesを紹介してきました。
 
