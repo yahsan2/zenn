@@ -113,10 +113,13 @@ git操作をコマンド化しておけば、毎回の確認をスキップで�
 ```md:.claude/commands/commit.md
 ---
 description: 変更をコミットする
+argument-hint: [メッセージ（省略可）]
 ---
 
 変更をコミットしてください。
 
+- git status で変更を確認
+- $ARGUMENTS があればそれをメッセージに、なければ変更内容から自動生成
 - ステージング → コミット
 - 確認は不要
 ```
