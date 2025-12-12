@@ -771,7 +771,7 @@ Claude Code では、`.claude/rules/` にルールを定義します。
 - tests/ - テストコード
 
 # データ構造
-- モデルには必ず id, createdAt, updatedAt を持たせる
+- モデル層には必ず id, createdAt, updatedAt を持たせる
 - APIレスポンスは { data, error, meta } の形式
 
 # 利用可能なサブエージェント
