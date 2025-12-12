@@ -1,5 +1,5 @@
 ---
-title: "ドラゴンを倒して覚える Claude Code - Command, Skill, Subagent, Rules"
+title: "ドラゴンを倒して覚える Claude Code - Command, Skill, Subagent, Rules の違いと使い分け"
 emoji: "🎮"
 type: "tech"
 topics: ["claudecode", "llm", "ai"]
@@ -734,6 +734,7 @@ Claude Code では、`.claude/rules/` にルールを定義します。
 
 # エリア構成
 - world/volcano/ - 火山エリア
+
 - world/underwater/ - 海底エリア
 - world/ice-cave/ - 氷の洞窟
 
