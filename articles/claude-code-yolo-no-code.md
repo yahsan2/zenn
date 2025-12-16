@@ -111,8 +111,7 @@ CLAUDE.md や Rules に明示的な命名規則の記載が見当たりません
 - 「形式が弱く、ルールとして認識されていなかった」
 
 :::message
-「ズレたら、理由を聞く」についても、自分はコマンドとして用意しています。ここでは省略します。
-メタコマンド・メタスキルの話は、要望あれば別の記事に書くのでよければフォローよろしくお願いします。
+「ズレたら、理由を聞く」についても、自分はコマンドとして用意しています。ここでは省略します。メタコマンド・メタスキルの話は、要望あれば別の記事に書くのでよければフォローよろしくお願いします。
 :::
 
 ---
@@ -124,9 +123,9 @@ CLAUDE.md や Rules に明示的な命名規則の記載が見当たりません
 **私は、コードを直しません。**
 **直すのは、常に入力です。**
 
-さっきの例なら、`getUserInfo` を `fetchUserData` に書き換えるのではなく、CLAUDE.md にルールを書かせます。
+さっきの例なら、`getUserInfo` を `fetchUserData` に書き換えるのではなく、plans.md に命名規則を追記させます。
 
-```markdown:CLAUDE.md
+```markdown:plans.md
 ## 命名規則
 
 ### 関数名
@@ -135,20 +134,7 @@ CLAUDE.md や Rules に明示的な命名規則の記載が見当たりません
 - データ削除: `delete` + `対象` (例: `deleteUser`, `deleteOrder`)
 ```
 
-あるいは、より強制力を持たせたいなら Rules に書かせます。
-
-```markdown:.claude/rules/naming.md
----
-description: 関数の命名規則
-globs: ["src/**/*.ts", "src/**/*.tsx"]
----
-
-データ取得関数は必ず `fetch` プレフィックスを使用すること。
-- OK: fetchUserData, fetchOrderList
-- NG: getUserInfo, getOrderData, loadUser
-```
-
-入力を更新したら、もう一度同じ指示を出します。
+plans.md を更新したら、もう一度同じ指示を出します。
 
 ```text
 ユーザー情報を取得する関数を作って
