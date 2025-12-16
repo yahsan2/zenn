@@ -123,7 +123,7 @@ CLAUDE.md や Rules に明示的な命名規則の記載が見当たりません
 **私は、コードを直しません。**
 **直すのは、常に入力です。**
 
-さっきの例なら、`getUserInfo` を `fetchUserData` に書き換えるのではなく、plans.md に命名規則を追記させます。
+さっきの例なら、`getUserInfo` を `fetchUserData` に書き換えるのではなく、plans.md に命名規則を追記させます。(CLAUDE.md や Rules に追記される時もあります)
 
 ```markdown:plans.md
 ## 命名規則
