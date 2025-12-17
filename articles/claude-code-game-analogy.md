@@ -1,5 +1,5 @@
 ---
-title: "ドラゴンを倒して覚える Claude Code - Command, Skill, Subagent, Rule の違いと使い分け"
+title: "ドラゴンを倒して覚える Claude Code - Commands, Skills, Subagents, Rules の違いと使い分け"
 emoji: "🎮"
 type: "tech"
 topics: ["claudecode", "llm", "ai"]
