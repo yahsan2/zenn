@@ -10,9 +10,9 @@ published: true
 
 Claude Code をカスタマイズしようとして、こんな経験はありませんか？
 
-- 「このルール、CLAUDE.md に書く？Skill に書く？」と手が止まる
-- Command を作ったのに、結局 Skill との違いがわからない
-- Subagent の存在は知っているけど、いつ使うか判断できない
+- 「このルール、CLAUDE.md に書く？Skills に書く？」と手が止まる
+- Commands を作ったのに、結局 Skills との違いがわからない
+- Subagents の存在は知っているけど、いつ使うか判断できない
 
 そして最近、**Rules** という機能まで登場しましたね。「また増えた...これどこに書くの？」
 
@@ -20,8 +20,8 @@ Claude Code をカスタマイズしようとして、こんな経験はあり�
 
 :::message
 この記事で扱う概念の公式ドキュメントはこちら:
-- [Custom slash commands（Command）](https://code.claude.com/docs/en/slash-commands)
-- [Agent Skills（Skill）](https://code.claude.com/docs/en/skills)
+- [Custom slash commands（Commands）](https://code.claude.com/docs/en/slash-commands)
+- [Agent Skills（Skills）](https://code.claude.com/docs/en/skills)
 - [Subagents](https://code.claude.com/docs/en/sub-agents)
 - [Modular rules（Rules）](https://code.claude.com/docs/en/memory#modular-rules-with-claude/rules/)
 :::
@@ -237,8 +237,8 @@ Claude Code では、`.claude/skills/` にスキルを定義します。
 **SkillとCommandの簡単な違い**:
 | 機能 | 例 | 役割 | 書く内容 |
 |------|----|------| ----|
-| **Command** | `/attack` | 何をやるか？ | タスク、CLIコマンド |
-| **Skill** | `サンダー魔法` | どうやるか？ | 記述ルール、複雑な手順、専門知識、スクリプト |
+| **Commands** | `/attack` | 何をやるか？ | タスク、CLIコマンド |
+| **Skills** | `サンダー魔法` | どうやるか？ | 記述ルール、複雑な手順、専門知識、スクリプト |
 
 このような区別をすると、すっきり分けられます。
 
@@ -253,7 +253,7 @@ Claude Code では、`.claude/skills/` にスキルを定義します。
 
 「魔法が得意な**魔法使い**を雇おう」
 
-この魔法使いは、主人公とは別に動くキャラクターです。これがClaude Codeでいう**Subagent（サブエージェント）** です。
+この魔法使いは、主人公とは別に動くキャラクターです。これがClaude Codeでいう**Subagents（サブエージェント）** です。
 
 **サブエージェント: 魔法使い**
 - 役割: 魔法で敵を攻撃することが得意
@@ -702,7 +702,7 @@ Claude Code では、`.claude/rules/` にルールを定義します。
 
 ## CLAUDE.mdには何を書く？
 
-ここまでCommand、Skill、Subagent、Rulesを紹介してきました。
+ここまでCommands、Skills、Subagents、Rulesを紹介してきました。
 
 では最後に、**CLAUDE.md**には何を書けばいいのでしょうか？
 
@@ -798,9 +798,9 @@ Claude Code では、プロジェクトルートに `CLAUDE.md` を置きます�
 |------|------|-------------|----------|
 | **CLAUDE.md** | 世界観 | 前提条件 | 常に適用される設定やルール |
 | **Rules** | エリアの設定・道の看板 | パス別の前提 | パスごとに異なる設定やルール |
-| **Command** | /attack | 何をやるか | よく使う指示をまとめたい |
-| **Skill** | サンダー魔法 | どうやるか | 複雑な手順・知識を定義したい |
-| **Subagent** | 魔法使い | どんな専門家か | 委託したい/並列実行したい |
+| **Commands** | /attack | 何をやるか | よく使う指示をまとめたい |
+| **Skills** | サンダー魔法 | どうやるか | 複雑な手順・知識を定義したい |
+| **Subagents** | 魔法使い | どんな専門家か | 委託したい/並列実行したい |
 
 
 あなたのAI冒険の旅が、より効率的になりますように！
