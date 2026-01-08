@@ -17,6 +17,8 @@ Skills機能に重要な変更がありました：
 
 Skillsの「ユーザーから直接呼び出せない」という制約がなくなったことで、今後は Skills を基本的に使えば問題がないと思います。ただこの記事で解説しているCommandsとSkillsの使い分けである、何をやるか or どうやるか（Claudeが知ってる or 知らない）を意識するのは、スキルを作る上で依然として有効な考え方かなと思います。
 
+また私が確認する限り vscode extension だと `user-invocable: false` が正しく反映されない不具合があるようです。こちらは今後のアップデートで修正されると思いますが、ご注意ください。
+
 詳細は[Agent Skills公式ドキュメント](https://code.claude.com/docs/en/skills)をご覧ください。
 :::
 
